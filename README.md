@@ -1,12 +1,12 @@
 ## prereqs
 
-Install docker on OS
+Install docker, make on LINUX
 
 add `172.0.0.1 gitlab.localhost.com` in your file `/etc/hosts`
 
 ## Login credentials
 
-The default user/password is root/password
+The default user is root and password is password
 
 ## Initialize and start gitlab stack
 
@@ -44,7 +44,7 @@ test:
    - echo "Well Done!!!"
 ```
 
-## Sample for test gitlab CI & build docker
+## Sample for test gitlab CI + build docker
 
 Dockerfile
 
@@ -70,7 +70,7 @@ build:
     - docker run my-docker-image
 ```
 
-## Sample for test gitlab CI & build docker & push image
+## Sample for test gitlab CI + build docker + push image
 
 Dockerfile
 
