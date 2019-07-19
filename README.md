@@ -67,7 +67,7 @@ build:
    - docker    
   script:
     - docker build -t my-docker-image .
-    - docker run my-docker-image
+    - docker run --rm my-docker-image
 ```
 
 ## Sample for test gitlab CI + build docker + push image
@@ -97,6 +97,6 @@ build:
    - docker    
   script:
     - docker build -t $IMAGE_TAG .
-    - docker run $IMAGE_TAG
+    - docker run --rm $IMAGE_TAG
     - docker push $IMAGE_TAG
 ```
