@@ -2,9 +2,9 @@ version: "3.6"
 
 services:
 
-# -------------------------------------  
+# -------------------------------------
 # GITLAB
-# -------------------------------------  
+# -------------------------------------
   gitlab:
     image: gitlab/gitlab-ce:latest
     ports:
@@ -28,12 +28,12 @@ services:
         aliases:
           - 'gitlab.localhost.com'
 
-# -------------------------------------  
+# -------------------------------------
 # GITLAB-RUNNER
-# -------------------------------------  
+# -------------------------------------
   gitlab-runner:
     depends_on:
-      - 'gitlab'      
+      - 'gitlab'
     image: gitlab/gitlab-runner:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
