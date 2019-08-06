@@ -12,9 +12,9 @@ services:
       - "8929:8929"
       - "5001:5001"
     volumes:
-      - ./gitlab/data:/var/opt/gitlab
-      - ./gitlab/logs:/var/log/gitlab
-      - ./gitlab/config:/etc/gitlab
+      - ../gitlab/data:/var/opt/gitlab
+      - ../gitlab/logs:/var/log/gitlab
+      - ../gitlab/config:/etc/gitlab
     hostname: 'gitlab.localhost.com'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
@@ -37,7 +37,7 @@ services:
     image: gitlab/gitlab-runner:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./gitlab-runner/config:/etc/gitlab-runner
+      - ../gitlab-runner/config:/etc/gitlab-runner
     networks:
       - 'default'
 

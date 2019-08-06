@@ -29,4 +29,5 @@ register:
 		--cache-s3-bucket-name gitlab
 
 remove:
+	sudo rm -rf ../gitlab/config/* ../gitlab/data/* ../gitlab/logs/* ../gitlab-runner/config/*
 	docker-compose rm -f -s

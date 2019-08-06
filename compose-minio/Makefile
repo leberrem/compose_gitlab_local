@@ -25,4 +25,5 @@ register:
 		--docker-volumes '/cache'
 
 remove:
+	sudo rm -rf ../gitlab/config/* ../gitlab/data/* ../gitlab/logs/* ../gitlab-runner/config/* ../minio/data/*
 	docker-compose rm -f -s
