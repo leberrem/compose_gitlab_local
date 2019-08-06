@@ -6,7 +6,7 @@ add `172.0.0.1 gitlab.localhost.com` in your file `/etc/hosts`
 
 ## Login credentials
 
-The default user is root and password is password
+The default user is `root` and password is `password`
 
 ## Initialize and start gitlab stack
 
