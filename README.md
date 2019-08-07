@@ -1,12 +1,8 @@
-## prereqs
-
-Install docker, make on LINUX
-
-add `172.0.0.1 gitlab.localhost.com` in your file `/etc/hosts`
 
 ## Login credentials
 
-The default user is `root` and password is `password`
+Gitlab default user is `root` and password is `password`
+Minio default user is `minio` and password is `minio123`
 
 ## Initialize and start gitlab stack
 
@@ -64,7 +60,7 @@ before_script:
 build:
   stage: build
   tags:
-   - docker    
+   - docker
   script:
     - docker build -t my-docker-image .
     - docker run --rm my-docker-image
@@ -89,14 +85,38 @@ variables:
 
 before_script:
   - docker info
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY  
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 build:
   stage: build
   tags:
-   - docker    
+   - docker
   script:
     - docker build -t $IMAGE_TAG .
     - docker run --rm $IMAGE_TAG
     - docker push $IMAGE_TAG
+```
+
+## Sample for test gitlab CI + cache
+
+.gitlab-ci.yml
+
+```yaml
+stages:
+ - build
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - test/
+
+test:
+  stage : build
+  tags:
+   - docker
+  script:
+   - echo "Well Done!!!"
+   - mkdir -p test
+   - ls test
+   - touch test/test.txt
 ```

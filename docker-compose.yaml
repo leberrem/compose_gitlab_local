@@ -12,21 +12,18 @@ services:
       - "8929:8929"
       - "5001:5001"
     volumes:
-      - ../gitlab/data:/var/opt/gitlab
-      - ../gitlab/logs:/var/log/gitlab
-      - ../gitlab/config:/etc/gitlab
-    hostname: 'gitlab.localhost.com'
+      - ./data/gitlab/data:/var/opt/gitlab
+      - ./data/gitlab/logs:/var/log/gitlab
+      - ./data/gitlab/config:/etc/gitlab
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://gitlab.localhost.com:8929'
-        registry_external_url 'http://gitlab.localhost.com:5001'
+        external_url 'http://gitlab:8929'
+        registry_external_url 'http://gitlab:5001'
         gitlab_rails['gitlab_shell_ssh_port'] = 2224
         gitlab_rails['initial_root_password'] =  'password'
         gitlab_rails['initial_shared_runners_registration_token'] =  'token'
     networks:
-      default:
-        aliases:
-          - 'gitlab.localhost.com'
+      - 'gitlab-network'
 
 # -------------------------------------
 # MINIO
@@ -34,15 +31,16 @@ services:
   minio:
     image: minio/minio:latest
     volumes:
-    - ../minio/data:/data
+    - ./data/minio/data:/data
     ports:
     - "9000:9000"
     environment:
       MINIO_ACCESS_KEY: minio
       MINIO_SECRET_KEY: minio123
+    entrypoint: sh
+    command: -c 'mkdir -p /data/gitlab && /usr/bin/minio server --compat /data'
     networks:
-      - 'default'
-    command: server /data
+      - 'gitlab-network'
 
 # -------------------------------------
 # GITLAB-RUNNER
@@ -54,10 +52,10 @@ services:
     image: gitlab/gitlab-runner:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ../gitlab-runner/config:/etc/gitlab-runner
+      - ./data/gitlab-runner/config:/etc/gitlab-runner
     networks:
-      - 'default'
+      - 'gitlab-network'
 
 networks:
-  default:
-    driver: 'bridge'
+  gitlab-network:
+    name: gitlab-network
