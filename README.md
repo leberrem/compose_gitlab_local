@@ -1,10 +1,10 @@
 
 ## Login credentials
 
-Gitlab default user is `root` and password is `password`
-Minio default user is `minio` and password is `minio123`
+* Gitlab default user is `root` and password is `password`
+* Minio default user is `minio` and password is `minio123`
 
-# Tips
+## Tips
 
 For using locally `gitlab API`, `gitlab Web IDE` and `gitlab container registry`, you must have a local IP for `gitlab` host
 Please add `127.0.0.1 gitlab` to `/etc/hosts`
@@ -12,6 +12,7 @@ Please add `127.0.0.1 gitlab` to `/etc/hosts`
 * GITLAB : http://gitlab:8929
 * GITLAB API : http://gitlab:8929/api/v4/version
 
+---
 
 ## Initialize and start gitlab stack
 
@@ -32,6 +33,8 @@ make start
 ## Remove gitlab stack
 
 make remove
+
+---
 
 ## Gitlab CI pipeline - simple
 
