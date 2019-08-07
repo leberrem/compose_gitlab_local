@@ -5,6 +5,11 @@ init:
 	mkdir -p data/gitlab-runner/config
 	mkdir -p data/minio/data
 	docker-compose up -d
+	@echo "# ----------------------------------"
+	@echo "# gitlab : http://localhost:8929"
+	@echo "# registry : http://localhost:5001/v2/"
+	@echo "# minio : http://localhost:9000"
+	@echo "# ----------------------------------"
 
 log:
 	docker-compose logs -f
